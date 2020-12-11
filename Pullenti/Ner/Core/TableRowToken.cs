@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -16,9 +17,6 @@ namespace Pullenti.Ner.Core
         public TableRowToken(Pullenti.Ner.Token b, Pullenti.Ner.Token e) : base(b, e, null)
         {
         }
-        /// <summary>
-        /// Ячейки строки таблицы
-        /// </summary>
         public List<TableCellToken> Cells = new List<TableCellToken>();
         internal bool Eor = false;
         internal bool LastRow = false;

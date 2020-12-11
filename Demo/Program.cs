@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -15,7 +16,7 @@ namespace Demo
         {
             Stopwatch sw = Stopwatch.StartNew();
             // инициализация - необходимо проводить один раз до обработки текстов
-            Console.Write("Initializing SDK Pullenti ver {0} ({1}) ... ", Pullenti.Sdk.Version, Pullenti.Sdk.VersionDate.ToShortDateString());
+            Console.Write("Initializing SDK Pullenti ver {0} ({1}) ... ", Pullenti.Sdk.Version, Pullenti.Sdk.VersionDate);
             // инициализируются движок и все имеющиеся анализаторы
             Pullenti.Sdk.InitializeAll();
             sw.Stop();
@@ -26,7 +27,7 @@ namespace Demo
                 Console.WriteLine("   {0} {1} \"{2}\"", (a.IsSpecific ? "Specific analyzer" : "Common analyzer"), a.Name, a.Caption);
             }
             // анализируемый текст
-            string txt = "SDK Pullenti разрабатывается с 2011 года российским программистом Константином Кузнецовым, проживающим в Москве на Красной площади в доме номер один на втором этаже. Конкурентов у него много: Abbyy, Yandex, ООО \"Russian Context Optimizer\" (RCO) и другие компании. Он планирует продать SDK за 1.120.000.001,99 (миллиард сто двадцать миллионов один рубль 99 копеек) рублей, без НДС.";
+            string txt = "Система разрабатывается с 2011 года российским программистом Михаилом Жуковым, проживающим в Москве на Красной площади в доме номер один на втором этаже. Конкурентов у него много: Abbyy, Yandex, ООО \"Russian Context Optimizer\" (RCO) и другие компании. Он планирует продать SDK за 1.120.000.001,99 (миллиард сто двадцать миллионов один рубль 99 копеек) рублей, без НДС.";
             Console.WriteLine("Text: {0}", txt);
             // запускаем обработку на пустом процессоре (без анализаторов NER)
             Pullenti.Ner.AnalysisResult are = Pullenti.Ner.ProcessorService.EmptyProcessor.Process(new Pullenti.Ner.SourceOfAnalysis(txt), null, null);

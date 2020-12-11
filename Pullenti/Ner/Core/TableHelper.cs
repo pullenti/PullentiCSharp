@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -17,13 +18,6 @@ namespace Pullenti.Ner.Core
     // обратного восстановления таблицы в случае необходимости.
     public static class TableHelper
     {
-        /// <summary>
-        /// Получить список строк таблицы
-        /// </summary>
-        /// <param name="t">начальная позиция</param>
-        /// <param name="maxChar">максимальная позиция (0 - не ограничена)</param>
-        /// <param name="mustBeStartOfTable">при true первый символ должен быть 1Eh</param>
-        /// <return>список строк</return>
         public static List<TableRowToken> TryParseRows(Pullenti.Ner.Token t, int maxChar, bool mustBeStartOfTable)
         {
             if (t == null) 

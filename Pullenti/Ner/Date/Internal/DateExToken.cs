@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -14,22 +15,13 @@ namespace Pullenti.Ner.Date.Internal
     // ВСЁ, этот класс теперь используется внутренним робразом, а DateReferent поддерживает относительные даты-время
     // Используется для нахождения в тексте абсолютных и относительных дат и диапазонов,
     // например, "в прошлом году", "за первый квартал этого года", "два дня назад и т.п."
-    class DateExToken : Pullenti.Ner.MetaToken
+    public class DateExToken : Pullenti.Ner.MetaToken
     {
         public DateExToken(Pullenti.Ner.Token begin, Pullenti.Ner.Token end) : base(begin, end, null)
         {
         }
-        /// <summary>
-        /// Признак того, что это диапазон
-        /// </summary>
         public bool IsDiap = false;
-        /// <summary>
-        /// Выделенные элементы (для диапазона начало периода)
-        /// </summary>
         public List<DateExItemToken> ItemsFrom = new List<DateExItemToken>();
-        /// <summary>
-        /// Для диапазона конец периода
-        /// </summary>
         public List<DateExItemToken> ItemsTo = new List<DateExItemToken>();
         public override string ToString()
         {
@@ -44,13 +36,6 @@ namespace Pullenti.Ner.Date.Internal
             }
             return tmp.ToString();
         }
-        /// <summary>
-        /// Получить дату-время (одну)
-        /// </summary>
-        /// <param name="now">текущая дата (для относительных вычислений)</param>
-        /// <param name="tense">время (-1 - прошлое, 0 - любое, 1 - будущее) - испрользуется 
-        /// при неоднозначных случаях</param>
-        /// <return>дата-время или null</return>
         public DateTime? GetDate(DateTime now, int tense = 0)
         {
             DateValues dvl = DateValues.TryCreate((ItemsFrom.Count > 0 ? ItemsFrom : ItemsTo), now, tense);
@@ -65,16 +50,6 @@ namespace Pullenti.Ner.Date.Internal
                 return null;
             }
         }
-        /// <summary>
-        /// Получить диапазон (если не диапазон, то from = to)
-        /// </summary>
-        /// <param name="now">текущая дата-время</param>
-        /// <param name="from">начало диапазона</param>
-        /// <param name="to">конец диапазона</param>
-        /// <param name="tense">время (-1 - прошлое, 0 - любое, 1 - будущее) - испрользуется 
-        /// при неоднозначных случаях 
-        /// Например, 7 сентября, а сейчас лето, то какой это год? При true - этот, при false - предыдущий</param>
-        /// <return>признак корректности</return>
         public bool GetDates(DateTime now, out DateTime from, out DateTime to, int tense = 0)
         {
             from = DateTime.MinValue;
@@ -580,9 +555,6 @@ namespace Pullenti.Ner.Date.Internal
             }
         }
 
-        /// <summary>
-        /// Выделить в тексте дату с указанной позиции
-        /// </summary>
         public static DateExToken TryParse(Pullenti.Ner.Token t)
         {
             if (t == null) 
@@ -775,17 +747,8 @@ namespace Pullenti.Ner.Date.Internal
             {
             }
             public Pullenti.Ner.Date.Internal.DateExToken.DateExItemTokenType Typ = Pullenti.Ner.Date.Internal.DateExToken.DateExItemTokenType.Undefined;
-            /// <summary>
-            /// Начало и конец диапазона, при совпадении значение точное
-            /// </summary>
             public int Value;
-            /// <summary>
-            /// Признак относительности значения (относительно текущей даты)
-            /// </summary>
             public bool IsValueRelate;
-            /// <summary>
-            /// Признак того, что значение примерное (в начале года)
-            /// </summary>
             public bool IsValueNotstrict;
             public Pullenti.Ner.Date.DateReferent Src;
             public override string ToString()
@@ -1047,15 +1010,9 @@ namespace Pullenti.Ner.Date.Internal
             Month = 4,
             Week = 5,
             Day = 6,
-            /// <summary>
-            /// День недели
-            /// </summary>
             DayOfWeek = 7,
             Hour = 8,
             Minute = 9,
-            /// <summary>
-            /// Выходные
-            /// </summary>
             Weekend = 10,
         }
 

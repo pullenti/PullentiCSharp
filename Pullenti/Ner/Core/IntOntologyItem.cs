@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -18,13 +19,7 @@ namespace Pullenti.Ner.Core
         {
             Referent = r;
         }
-        /// <summary>
-        /// Список терминов, ассоциированных со словарной записью
-        /// </summary>
         public List<Termin> Termins = new List<Termin>();
-        /// <summary>
-        /// Каноноический текст
-        /// </summary>
         public string CanonicText
         {
             get
@@ -39,9 +34,6 @@ namespace Pullenti.Ner.Core
             }
         }
         string m_CanonicText;
-        /// <summary>
-        /// В качестве канонического текста установить самый короткий среди терминов
-        /// </summary>
         public void SetShortestCanonicalText(bool ignoreTerminsWithNotnullTags = false)
         {
             m_CanonicText = null;
@@ -60,25 +52,10 @@ namespace Pullenti.Ner.Core
                     m_CanonicText = s;
             }
         }
-        /// <summary>
-        /// Необязательный тип элемента
-        /// </summary>
         public string Typ;
-        /// <summary>
-        /// Используется произвольным образом (для некоторого дополнительного признака)
-        /// </summary>
         public object MiscAttr;
-        /// <summary>
-        /// Ссылка на онтологию
-        /// </summary>
         public IntOntologyCollection Owner;
-        /// <summary>
-        /// Ссылка на сущность
-        /// </summary>
         public Pullenti.Ner.Referent Referent;
-        /// <summary>
-        /// Используется произвольным образом
-        /// </summary>
         public object Tag;
         public override string ToString()
         {

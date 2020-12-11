@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -1717,22 +1718,10 @@ namespace Pullenti.Ner.Person.Internal
             CanBeLatin = 2,
             CanInitialBeDigit = 4,
             CanBeLower = 8,
-            /// <summary>
-            /// Всегда выделять элемент, не делать никакие проверки
-            /// </summary>
             MustBeItemAlways = 0x10,
             IgnoreAttrs = 0x20,
-            /// <summary>
-            /// Известно, что персона в именительном падеже
-            /// </summary>
             NominativeCase = 0x40,
-            /// <summary>
-            /// Для фамилий префиксы (фон, ван) оформлять отдельным элементом
-            /// </summary>
             SurnamePrefixNotMerge = 0x80,
-            /// <summary>
-            /// Ослабленная проверка, когда перед комбинацией находится атрибут персоны
-            /// </summary>
             AfterAttribute = 0x100,
         }
 
@@ -2097,10 +2086,6 @@ namespace Pullenti.Ner.Person.Internal
             }
             return res;
         }
-        /// <summary>
-        /// Это попытка привязать персону со специфического места
-        /// </summary>
-        /// <param name="prevPersTemplate">шаблон от предыдущей персоны (поможет принять решение в случае ошибки)</param>
         public static Pullenti.Ner.ReferentToken TryParsePerson(Pullenti.Ner.Token t, FioTemplateType prevPersTemplate = FioTemplateType.Undefined)
         {
             if (t == null) 

@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -155,10 +156,6 @@ namespace Pullenti.Ner.Core.Internal
             }
             return res;
         }
-        /// <summary>
-        /// Сформировать всевозможные варианты написаний на другой раскладке
-        /// </summary>
-        /// <param name="rusOrLat">слово на кириллице или латинице</param>
         public static List<string> GetVariants(string rusOrLat)
         {
             List<string> res = new List<string>();
@@ -292,9 +289,6 @@ namespace Pullenti.Ner.Core.Internal
             }
             return false;
         }
-        /// <summary>
-        /// Вернёт длину привязки
-        /// </summary>
         public static int FindAccordsRusToLat(string txt, int pos, List<string> res)
         {
             if (pos >= txt.Length) 

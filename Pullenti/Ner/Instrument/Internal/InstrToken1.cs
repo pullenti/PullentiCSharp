@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -19,9 +20,6 @@ namespace Pullenti.Ner.Instrument.Internal
         public Pullenti.Ner.Instrument.InstrumentReferent IRef;
         public bool IsExpired;
         public List<string> Numbers = new List<string>();
-        /// <summary>
-        /// Это используется, когда задаются диапазоны ...
-        /// </summary>
         public string MinNumber;
         public NumberTypes NumTyp = NumberTypes.Undefined;
         public string NumSuffix;
@@ -108,9 +106,6 @@ namespace Pullenti.Ner.Instrument.Internal
         public bool AllUpper;
         public bool HasVerb;
         public bool HasManySpecChars;
-        /// <summary>
-        /// Признак того, что это стандартный заголовок (н-р, РЕКВИЗИТЫ И ПОДПИСИ СТОРОН)
-        /// </summary>
         public StdTitleType TitleTyp = StdTitleType.Undefined;
         public bool IndexNoKeyword = false;
         public override string ToString()

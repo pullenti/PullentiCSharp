@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -36,21 +37,9 @@ namespace Pullenti.Ner.Decree.Internal
             Reading,
         }
 
-        /// <summary>
-        /// Тип примитива
-        /// </summary>
         public ItemType Typ;
-        /// <summary>
-        /// Значение
-        /// </summary>
         public string Value;
-        /// <summary>
-        /// Это длинное значение (для кодексов)
-        /// </summary>
         public string FullValue;
-        /// <summary>
-        /// Ссылка на сущность, если есть
-        /// </summary>
         public Pullenti.Ner.ReferentToken Ref;
         public List<DecreeToken> Children = null;
         public bool IsDoubtful;
@@ -75,9 +64,6 @@ namespace Pullenti.Ner.Decree.Internal
                 v = Ref.Referent.ToString(true, Kit.BaseLanguage, 0);
             return string.Format("{0} {1} {2}", Typ.ToString(), v, FullValue ?? "");
         }
-        /// <summary>
-        /// Привязать с указанной позиции один примитив
-        /// </summary>
         public static DecreeToken TryAttach(Pullenti.Ner.Token t, DecreeToken prev = null, bool mustByTyp = false)
         {
             if (t == null) 
@@ -599,7 +585,7 @@ namespace Pullenti.Ner.Decree.Internal
                                             if (ss.Length != 2 && ss.Length != 4) 
                                                 break;
                                             if (ss[0] == '0' && ss.Length == 2) 
-                                                nn = 2000 + ((ss[1] - '0'));
+                                                nn = 2000 + ((int)((ss[1] - '0')));
                                             else if (int.TryParse(ss, out nn)) 
                                             {
                                                 if (nn > 50 && nn <= 99) 
@@ -1529,10 +1515,6 @@ namespace Pullenti.Ner.Decree.Internal
                 res = res.Next;
             return res;
         }
-        /// <summary>
-        /// Привязать примитивы в контейнере с указанной позиции
-        /// </summary>
-        /// <return>Список примитивов</return>
         public static List<DecreeToken> TryAttachList(Pullenti.Ner.Token t, DecreeToken prev = null, int maxCount = 10, bool mustStartByTyp = false)
         {
             DecreeToken p = TryAttach(t, prev, mustStartByTyp);
@@ -1576,7 +1558,7 @@ namespace Pullenti.Ner.Decree.Internal
                 {
                     if (p0 == null || p == null) 
                         break;
-                    if (((p.Typ == ItemType.Typ && p0.Typ == ItemType.Number)) || ((p0.Typ == ItemType.Name && p.Typ != ItemType.Name)) || ((p0.Typ == ItemType.Org && p.Typ == ItemType.Org))) 
+                    if ((((p.Typ == ItemType.Typ && p0.Typ == ItemType.Number)) || ((p.Typ == ItemType.Date && p0.Typ == ItemType.Number)) || ((p0.Typ == ItemType.Name && p.Typ != ItemType.Name))) || ((p0.Typ == ItemType.Org && p.Typ == ItemType.Org))) 
                     {
                     }
                     else if ((((p0.Typ == ItemType.Date || p0.Typ == ItemType.Number)) && p.Typ == ItemType.Org && res.Count == 2) && res[0].Typ == ItemType.Typ) 
@@ -2175,6 +2157,21 @@ namespace Pullenti.Ner.Decree.Internal
                 if (tt1 != null && tt1.EndChar > t1.EndChar) 
                     t1 = tt1;
             }
+            if (t0.Previous != null && Pullenti.Ner.Core.BracketHelper.CanBeStartOfSequence(t0.Previous, true, false) && !Pullenti.Ner.Core.BracketHelper.IsBracket(t1, false)) 
+            {
+                int co = 0;
+                for (Pullenti.Ner.Token ttt = t1.Next; ttt != null && (cou < 40); ttt = ttt.Next,co++) 
+                {
+                    if (Pullenti.Ner.Core.BracketHelper.CanBeEndOfSequence(ttt, true, t0.Previous, false)) 
+                    {
+                        t1 = ttt;
+                        t0 = t0.Previous;
+                        break;
+                    }
+                    if (Pullenti.Ner.Core.BracketHelper.IsBracket(ttt, true)) 
+                        break;
+                }
+            }
             string s = Pullenti.Ner.Core.MiscHelper.GetTextValue(t0, t1, Pullenti.Ner.Core.GetTextAttr.FirstNounGroupToNominative | Pullenti.Ner.Core.GetTextAttr.KeepRegister);
             if (string.IsNullOrEmpty(s) || (s.Length < 10)) 
                 return null;
@@ -2211,6 +2208,18 @@ namespace Pullenti.Ner.Decree.Internal
                     continue;
                 if (tt.IsComma) 
                     continue;
+                Pullenti.Ner.ReferentToken rtt = Pullenti.Ner.Decree.DecreeAnalyzer.TryAttachApproved(tt, null);
+                if (rtt != null && t0.Previous != null && Pullenti.Ner.Core.BracketHelper.CanBeStartOfSequence(t0.Previous, true, false)) 
+                {
+                    Pullenti.Ner.Core.BracketSequenceToken br = Pullenti.Ner.Core.BracketHelper.TryParse(t0.Previous, Pullenti.Ner.Core.BracketParseAttr.No, 100);
+                    if (br != null && (br.EndChar < rtt.EndChar)) 
+                        rtt = null;
+                }
+                if (rtt != null) 
+                {
+                    t1 = (tt = rtt.EndToken);
+                    continue;
+                }
                 Pullenti.Ner.Core.NounPhraseToken npt = Pullenti.Ner.Core.NounPhraseHelper.TryParse(tt, Pullenti.Ner.Core.NounPhraseParseAttr.No, 0, null);
                 if (npt != null) 
                 {
@@ -2659,9 +2668,6 @@ namespace Pullenti.Ner.Decree.Internal
                 return true;
             return false;
         }
-        /// <summary>
-        /// Добавить новый тип НПА
-        /// </summary>
         public static void AddNewType(string typ, string acronym = null)
         {
             Pullenti.Ner.Core.Termin t = new Pullenti.Ner.Core.Termin(typ) { Tag = ItemType.Typ, Acronym = acronym };
@@ -2670,8 +2676,8 @@ namespace Pullenti.Ner.Decree.Internal
         }
         static List<string> m_AllTypesRU = new List<string>(new string[] {"УКАЗ", "УКАЗАНИЕ", "ПОСТАНОВЛЕНИЕ", "РАСПОРЯЖЕНИЕ", "ПРИКАЗ", "ДИРЕКТИВА", "ПИСЬМО", "ЗАПИСКА", "ИНФОРМАЦИОННОЕ ПИСЬМО", "ИНСТРУКЦИЯ", "ЗАКОН", "КОДЕКС", "КОНСТИТУЦИЯ", "РЕШЕНИЕ", "ПОЛОЖЕНИЕ", "РАСПОРЯЖЕНИЕ", "ПОРУЧЕНИЕ", "РЕЗОЛЮЦИЯ", "ДОГОВОР", "СУБДОГОВОР", "АГЕНТСКИЙ ДОГОВОР", "ДОВЕРЕННОСТЬ", "КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ", "КОНТРАКТ", "ГОСУДАРСТВЕННЫЙ КОНТРАКТ", "ОПРЕДЕЛЕНИЕ", "ПРИГОВОР", "СОГЛАШЕНИЕ", "ПРОТОКОЛ", "ЗАЯВЛЕНИЕ", "УВЕДОМЛЕНИЕ", "РАЗЪЯСНЕНИЕ", "УСТАВ", "ХАРТИЯ", "КОНВЕНЦИЯ", "ПАКТ", "БИЛЛЬ", "ДЕКЛАРАЦИЯ", "РЕГЛАМЕНТ", "ТЕЛЕГРАММА", "ТЕЛЕФОНОГРАММА", "ТЕЛЕФАКСОГРАММА", "ТЕЛЕТАЙПОГРАММА", "ФАКСОГРАММА", "ОТВЕТЫ НА ВОПРОСЫ", "ВЫПИСКА ИЗ ПРОТОКОЛА", "ЗАКЛЮЧЕНИЕ", "ДЕКРЕТ"});
         static List<string> m_AllTypesUA = new List<string>(new string[] {"УКАЗ", "НАКАЗ", "ПОСТАНОВА", "РОЗПОРЯДЖЕННЯ", "НАКАЗ", "ДИРЕКТИВА", "ЛИСТ", "ЗАПИСКА", "ІНФОРМАЦІЙНИЙ ЛИСТ", "ІНСТРУКЦІЯ", "ЗАКОН", "КОДЕКС", "КОНСТИТУЦІЯ", "РІШЕННЯ", "ПОЛОЖЕННЯ", "РОЗПОРЯДЖЕННЯ", "ДОРУЧЕННЯ", "РЕЗОЛЮЦІЯ", "ДОГОВІР", "СУБКОНТРАКТ", "АГЕНТСЬКИЙ ДОГОВІР", "ДОРУЧЕННЯ", "КОМЕРЦІЙНА ПРОПОЗИЦІЯ", "КОНТРАКТ", "ДЕРЖАВНИЙ КОНТРАКТ", "ВИЗНАЧЕННЯ", "ВИРОК", "УГОДА", "ПРОТОКОЛ", "ЗАЯВА", "ПОВІДОМЛЕННЯ", "РОЗ'ЯСНЕННЯ", "СТАТУТ", "ХАРТІЯ", "КОНВЕНЦІЯ", "ПАКТ", "БІЛЛЬ", "ДЕКЛАРАЦІЯ", "РЕГЛАМЕНТ", "ТЕЛЕГРАМА", "ТЕЛЕФОНОГРАМА", "ТЕЛЕФАКСОГРАММА", "ТЕЛЕТАЙПОГРАМА", "ФАКСОГРАМА", "ВІДПОВІДІ НА ЗАПИТАННЯ", "ВИТЯГ З ПРОТОКОЛУ", "ВИСНОВОК", "ДЕКРЕТ"});
-        static List<string> m_MiscTypesRU = new List<string>(new string[] {"ПРАВИЛО", "ПРОГРАММА", "ПЕРЕЧЕНЬ", "ПОСОБИЕ", "РЕКОМЕНДАЦИЯ", "НАСТАВЛЕНИЕ", "СТАНДАРТ", "СОГЛАШЕНИЕ", "МЕТОДИКА", "ТРЕБОВАНИЕ", "ПОЛОЖЕНИЕ", "СПИСОК", "ЛИСТ", "ТАБЛИЦА", "ЗАЯВКА", "АКТ", "ФОРМА", "НОРМАТИВ", "ПОРЯДОК", "ИНФОРМАЦИЯ", "НОМЕНКЛАТУРА", "ОСНОВА", "ОБЗОР", "КОНЦЕПЦИЯ", "СТРАТЕГИЯ", "СТРУКТУРА", "УСЛОВИЕ", "КЛАССИФИКАТОР", "ОБЩЕРОССИЙСКИЙ КЛАССИФИКАТОР", "СПЕЦИФИКАЦИЯ", "ОБРАЗЕЦ"});
-        static List<string> m_MiscTypesUA = new List<string>(new string[] {"ПРАВИЛО", "ПРОГРАМА", "ПЕРЕЛІК", "ДОПОМОГА", "РЕКОМЕНДАЦІЯ", "ПОВЧАННЯ", "СТАНДАРТ", "УГОДА", "МЕТОДИКА", "ВИМОГА", "ПОЛОЖЕННЯ", "СПИСОК", "ТАБЛИЦЯ", "ЗАЯВКА", "АКТ", "ФОРМА", "НОРМАТИВ", "ПОРЯДОК", "ІНФОРМАЦІЯ", "НОМЕНКЛАТУРА", "ОСНОВА", "ОГЛЯД", "КОНЦЕПЦІЯ", "СТРАТЕГІЯ", "СТРУКТУРА", "УМОВА", "КЛАСИФІКАТОР", "ЗАГАЛЬНОРОСІЙСЬКИЙ КЛАСИФІКАТОР", "СПЕЦИФІКАЦІЯ", "ЗРАЗОК"});
+        static List<string> m_MiscTypesRU = new List<string>(new string[] {"ПРАВИЛО", "ПРОГРАММА", "ПЕРЕЧЕНЬ", "ПОСОБИЕ", "РЕКОМЕНДАЦИЯ", "НАСТАВЛЕНИЕ", "СТАНДАРТ", "СОГЛАШЕНИЕ", "МЕТОДИКА", "ТРЕБОВАНИЕ", "ПОЛОЖЕНИЕ", "СПИСОК", "ЛИСТ", "ТАБЛИЦА", "ЗАЯВКА", "АКТ", "ФОРМА", "НОРМАТИВ", "РЕЕСТР", "ПОРЯДОК", "ИНФОРМАЦИЯ", "НОМЕНКЛАТУРА", "ОСНОВА", "ОБЗОР", "КОНЦЕПЦИЯ", "СТРАТЕГИЯ", "СТРУКТУРА", "УСЛОВИЕ", "КЛАССИФИКАТОР", "ОБЩЕРОССИЙСКИЙ КЛАССИФИКАТОР", "СПЕЦИФИКАЦИЯ", "ОБРАЗЕЦ"});
+        static List<string> m_MiscTypesUA = new List<string>(new string[] {"ПРАВИЛО", "ПРОГРАМА", "ПЕРЕЛІК", "ДОПОМОГА", "РЕКОМЕНДАЦІЯ", "ПОВЧАННЯ", "СТАНДАРТ", "УГОДА", "МЕТОДИКА", "ВИМОГА", "ПОЛОЖЕННЯ", "СПИСОК", "ТАБЛИЦЯ", "ЗАЯВКА", "АКТ", "ФОРМА", "НОРМАТИВ", "РЕЄСТР", "ПОРЯДОК", "ІНФОРМАЦІЯ", "НОМЕНКЛАТУРА", "ОСНОВА", "ОГЛЯД", "КОНЦЕПЦІЯ", "СТРАТЕГІЯ", "СТРУКТУРА", "УМОВА", "КЛАСИФІКАТОР", "ЗАГАЛЬНОРОСІЙСЬКИЙ КЛАСИФІКАТОР", "СПЕЦИФІКАЦІЯ", "ЗРАЗОК"});
         static List<string> m_StdAdjectives = new List<string>(new string[] {"ВСЕОБЩИЙ", "МЕЖДУНАРОДНЫЙ", "ЗАГАЛЬНИЙ", "МІЖНАРОДНИЙ", "НОРМАТИВНЫЙ", "НОРМАТИВНИЙ", "КАССАЦИОННЫЙ", "АПЕЛЛЯЦИОННЫЙ", "КАСАЦІЙНИЙ", "АПЕЛЯЦІЙНИЙ"});
         static List<string> m_EmptyAdjectives = new List<string>(new string[] {"НЫНЕШНИЙ", "ПРЕДЫДУЩИЙ", "ДЕЙСТВУЮЩИЙ", "НАСТОЯЩИЙ", "НИНІШНІЙ", "ПОПЕРЕДНІЙ", "СПРАВЖНІЙ"});
         public static Pullenti.Ner.Decree.DecreeKind GetKind(string typ)

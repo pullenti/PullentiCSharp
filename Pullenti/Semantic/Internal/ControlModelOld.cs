@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -13,32 +14,11 @@ namespace Pullenti.Semantic.Internal
 {
     public class ControlModelOld
     {
-        /// <summary>
-        /// Признак переходности группы (то, что за сущ. слово в родимт. падеже, 
-        /// а за невозвратным глаголом - в винительном).
-        /// </summary>
         public bool Transitive;
-        /// <summary>
-        /// Возможные продолжения (следующее слово): 
-        /// Пары: (Предлог, Падежи). 
-        /// Для транзитивной группы не указываются род.п. (сущ) или вин.п. (глаг)
-        /// </summary>
         public Dictionary<string, Pullenti.Morph.MorphCase> Nexts;
-        /// <summary>
-        /// Возможные вопросы для продолжения
-        /// </summary>
         public Pullenti.Semantic.Utils.QuestionType Questions = Pullenti.Semantic.Utils.QuestionType.Undefined;
-        /// <summary>
-        /// Глагольная роль "агенс"
-        /// </summary>
         public NextModelItem Agent;
-        /// <summary>
-        /// Глагольная роль "пациенс"
-        /// </summary>
         public NextModelItem Pacient;
-        /// <summary>
-        /// Глагольная роль "инструмент"
-        /// </summary>
         public NextModelItem Instrument;
         public override string ToString()
         {

@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -87,9 +88,6 @@ namespace Pullenti.Ner.Mail.Internal
                 return false;
             }
         }
-        /// <summary>
-        /// Это кол-во элементов, которые характеризуют вложенность письма
-        /// </summary>
         public int Lev = 0;
         public enum Types : int
         {

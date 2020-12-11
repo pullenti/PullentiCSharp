@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -17,41 +18,17 @@ namespace Pullenti.Ner.Measure.Internal
         public NumbersWithUnitToken(Pullenti.Ner.Token b, Pullenti.Ner.Token e) : base(b, e, null)
         {
         }
-        /// <summary>
-        /// Одиночное значение, если не null, то скаляр - фактически совпадает с NumberExToken
-        /// </summary>
         public double? SingleVal;
         public double? PlusMinus;
         public bool PlusMinusPercent;
-        /// <summary>
-        /// Включается ли минимальное значение в диапапазон или исключается
-        /// </summary>
         public bool FromInclude;
-        /// <summary>
-        /// Минимальное значение (если null, то неопределено)
-        /// </summary>
         public double? FromVal;
-        /// <summary>
-        /// Включается ли максимальное значение в диапазон
-        /// </summary>
         public bool ToInclude;
-        /// <summary>
-        /// Максимальное значение (если null, то неопределено)
-        /// </summary>
         public double? ToVal;
-        /// <summary>
-        /// Около
-        /// </summary>
         public bool About;
         public bool Not = false;
         public Pullenti.Ner.MetaToken WHL;
-        /// <summary>
-        /// Единицы измерения
-        /// </summary>
         public List<UnitToken> Units = new List<UnitToken>();
-        /// <summary>
-        /// Чтсло, слкдующее после знака деления
-        /// </summary>
         public NumbersWithUnitToken DivNum;
         public bool IsAge;
         public override string ToString()
@@ -259,9 +236,6 @@ namespace Pullenti.Ner.Measure.Internal
             res.Add(mt);
             return res;
         }
-        /// <summary>
-        /// Попробовать выделить с указанной позиции
-        /// </summary>
         public static NumbersWithUnitToken TryParse(Pullenti.Ner.Token t, Pullenti.Ner.Core.TerminCollection addUnits, bool canOmitNumber = false, bool not = false, bool canBeNan = false, bool isResctriction = false)
         {
             if (t == null) 
@@ -850,9 +824,6 @@ namespace Pullenti.Ner.Measure.Internal
                 res.IsAge = true;
             return res;
         }
-        /// <summary>
-        /// Это распознавание написаний ГхШхВ
-        /// </summary>
         public static Pullenti.Ner.MetaToken _tryParseWHL(Pullenti.Ner.Token t)
         {
             if (!(t is Pullenti.Ner.TextToken)) 

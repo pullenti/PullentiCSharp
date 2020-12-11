@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -12,26 +13,11 @@ namespace Pullenti.Ner.Core
     // Устарело, вместо этого лучше использовать MeasureReferent или NumbersWithUnitToken
     public class NumberExToken : Pullenti.Ner.NumberToken
     {
-        /// <summary>
-        /// Это возможно в скобках другое написание
-        /// </summary>
         public double AltRealValue;
         public int AltRestMoney = 0;
-        /// <summary>
-        /// Тип постфикса
-        /// </summary>
         public NumberExType ExTyp = NumberExType.Undefined;
-        /// <summary>
-        /// Это постфикс после деления, например гр./м3
-        /// </summary>
         public NumberExType ExTyp2 = NumberExType.Undefined;
-        /// <summary>
-        /// Дополнительный параметр постфикса (для денег - 3-х значный код валюты)
-        /// </summary>
         public string ExTypParam;
-        /// <summary>
-        /// Это признак того, что "множитель" слипся с единицей измерения
-        /// </summary>
         public bool MultAfter;
         internal NumberExToken(Pullenti.Ner.Token begin, Pullenti.Ner.Token end, string val, Pullenti.Ner.NumberSpellingType typ, NumberExType exTyp = NumberExType.Undefined) : base(begin, end, val, typ, null)
         {

@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -632,7 +633,7 @@ namespace Pullenti.Ner.Core
             }
             if (string.IsNullOrEmpty(val)) 
                 return null;
-            int dig = (val[val.Length - 1] - '0');
+            int dig = (int)((val[val.Length - 1] - '0'));
             if ((dig < 0) || dig >= 10) 
                 return null;
             List<Pullenti.Morph.MorphWordForm> vars = Pullenti.Morph.MorphologyService.GetAllWordforms(m_Samples[dig], null);
@@ -972,17 +973,17 @@ namespace Pullenti.Ner.Core
                     if (t.IsValue("ДЕСЯТЫЙ", null)) 
                     {
                         res0.EndToken = t;
-                        res0.RealValue = (((val) / 10)) + res0.RealValue;
+                        res0.RealValue = ((((double)val) / 10)) + res0.RealValue;
                     }
                     else if (t.IsValue("СОТЫЙ", null)) 
                     {
                         res0.EndToken = t;
-                        res0.RealValue = (((val) / 100)) + res0.RealValue;
+                        res0.RealValue = ((((double)val) / 100)) + res0.RealValue;
                     }
                     else if (t.IsValue("ТЫСЯЧНЫЙ", null)) 
                     {
                         res0.EndToken = t;
-                        res0.RealValue = (((val) / 1000)) + res0.RealValue;
+                        res0.RealValue = ((((double)val) / 1000)) + res0.RealValue;
                     }
                 }
                 if (res0.RealValue == 0) 
@@ -1304,7 +1305,7 @@ namespace Pullenti.Ner.Core
                     else if (res[jj] == '-') 
                         neg = true;
                     else 
-                        exp = (exp * 10) + ((res[jj] - '0'));
+                        exp = (exp * 10) + ((int)((res[jj] - '0')));
                 }
                 res = res.Substring(0, i);
                 if (res.EndsWith(".0")) 
@@ -1381,7 +1382,7 @@ namespace Pullenti.Ner.Core
                                 if (res[j] != '9') 
                                 {
                                     if (res[j] != '.') 
-                                        return string.Format("{0}{1}", res.Substring(0, j), ((res[j] - '0')) + 1);
+                                        return string.Format("{0}{1}", res.Substring(0, j), ((int)((res[j] - '0'))) + 1);
                                 }
                             }
                             break;

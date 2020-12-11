@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -147,7 +148,7 @@ namespace Pullenti.Ner.Date
         /// <param name="now">текущая дата-время</param>
         /// <param name="from">результирующее начало диапазона</param>
         /// <param name="to">результирующий конец диапазона</param>
-        /// <param name="tense">время (-1 - прошлое, 0 - любое, 1 - будущее) - испрользуется 
+        /// <param name="tense">время (-1 - прошлое, 0 - любое, 1 - будущее) - используется 
         /// при неоднозначных случаях 
         /// Например, 7 сентября, а сейчас лето, то какой это год? При +1 - этот, при -1 - предыдущий</param>
         /// <return>признак корректности</return>
@@ -361,7 +362,7 @@ namespace Pullenti.Ner.Date
                     if (res is DatePointerType) 
                         return (DatePointerType)res;
                 }
-                catch(Exception ex725) 
+                catch(Exception ex957) 
                 {
                 }
                 return DatePointerType.No;
@@ -526,7 +527,7 @@ namespace Pullenti.Ner.Date
                 res.AppendFormat((lang.IsEn ? "to " : "по "));
             if (p != DatePointerType.No) 
             {
-                string val = Pullenti.Ner.Date.Internal.MetaDate.Pointer.ConvertInnerValueToOuterValue(p.ToString(), lang);
+                string val = (string)Pullenti.Ner.Date.Internal.MetaDate.Pointer.ConvertInnerValueToOuterValue(p.ToString(), lang);
                 if (fromRange == 0 || lang.IsEn) 
                 {
                 }

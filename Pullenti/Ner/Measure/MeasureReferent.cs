@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -113,7 +114,7 @@ namespace Pullenti.Ner.Measure
                 {
                     return (MeasureKind)Enum.Parse(typeof(MeasureKind), str, true);
                 }
-                catch(Exception ex1736) 
+                catch(Exception ex2380) 
                 {
                 }
                 return MeasureKind.Undefined;
@@ -148,7 +149,7 @@ namespace Pullenti.Ner.Measure
                 char ch = res[i];
                 if (!char.IsDigit(ch)) 
                     continue;
-                int j = (ch - '1');
+                int j = (int)((ch - '1'));
                 if ((j < 0) || j >= vals.Count) 
                     continue;
                 res.Remove(i, 1);

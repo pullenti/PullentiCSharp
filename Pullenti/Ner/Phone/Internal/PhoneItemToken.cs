@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -28,13 +29,7 @@ namespace Pullenti.Ner.Phone.Internal
             Alt,
         }
 
-        /// <summary>
-        /// Тип примитива
-        /// </summary>
         public PhoneItemType ItemType;
-        /// <summary>
-        /// Строковое значение
-        /// </summary>
         public string Value;
         public Pullenti.Ner.Phone.PhoneKind Kind = Pullenti.Ner.Phone.PhoneKind.Undefined;
         public bool IsInBrackets;
@@ -52,9 +47,6 @@ namespace Pullenti.Ner.Phone.Internal
         {
             return (ItemType + ": " + Value) + ((Kind == Pullenti.Ner.Phone.PhoneKind.Undefined ? "" : string.Format(" ({0})", Kind)));
         }
-        /// <summary>
-        /// Привязать с указанной позиции один примитив
-        /// </summary>
         public static PhoneItemToken TryAttach(Pullenti.Ner.Token t0)
         {
             PhoneItemToken res = _TryAttach(t0);
@@ -303,10 +295,6 @@ namespace Pullenti.Ner.Phone.Internal
             PhoneItemToken res = new PhoneItemToken(t0, t) { ItemType = PhoneItemType.AddNumber, Value = val };
             return res;
         }
-        /// <summary>
-        /// Привязать примитивы в контейнере с указанной позиции
-        /// </summary>
-        /// <return>Список примитивов</return>
         public static List<PhoneItemToken> TryAttachAll(Pullenti.Ner.Token t0, int maxCount = 15)
         {
             if (t0 == null) 

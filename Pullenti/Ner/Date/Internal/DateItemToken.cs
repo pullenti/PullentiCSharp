@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -31,21 +32,9 @@ namespace Pullenti.Ner.Date.Internal
             Century,
         }
 
-        /// <summary>
-        /// Тип примитива
-        /// </summary>
         public DateItemType Typ;
-        /// <summary>
-        /// Строковое значение (для разделителя)
-        /// </summary>
         public string StringValue;
-        /// <summary>
-        /// Числовое значение
-        /// </summary>
         public int IntValue;
-        /// <summary>
-        /// Язык
-        /// </summary>
         public Pullenti.Morph.MorphLang Lang;
         public int NewAge = 0;
         public override string ToString()
@@ -161,9 +150,6 @@ namespace Pullenti.Ner.Date.Internal
                 return Kit.Sofa.Text[BeginChar] == '0';
             }
         }
-        /// <summary>
-        /// Привязать с указанной позиции один примитив
-        /// </summary>
         public static DateItemToken TryAttach(Pullenti.Ner.Token t, List<DateItemToken> prev, bool detailRegime = false)
         {
             if (t == null) 
@@ -883,10 +869,6 @@ namespace Pullenti.Ner.Date.Internal
             }
             return null;
         }
-        /// <summary>
-        /// Привязать примитивы в контейнере с указанной позиции
-        /// </summary>
-        /// <return>Список примитивов</return>
         public static List<DateItemToken> TryAttachList(Pullenti.Ner.Token t, int maxCount = 20)
         {
             DateItemToken p = TryAttach(t, null, false);

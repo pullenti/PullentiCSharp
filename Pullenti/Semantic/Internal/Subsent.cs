@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -119,7 +120,7 @@ namespace Pullenti.Semantic.Internal
             List<Subsent> res = new List<Subsent>();
             int begin = sent.Items[0].BeginToken.BeginChar;
             int end = sent.Items[sent.Items.Count - 1].EndToken.EndChar;
-            byte[] map = new byte[(end + 1) - begin];
+            byte[] map = new byte[(int)((end + 1) - begin)];
             if (sent.BestVar != null) 
             {
                 foreach (NGSegmentVariant seg in sent.BestVar.Segs) 

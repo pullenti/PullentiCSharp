@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -172,7 +173,7 @@ namespace Pullenti.Ner.Money
                 }
                 re = (int)Math.Round(((nex.AltRealValue - ((long)nex.AltRealValue))) * 100, 6);
                 if (re != res.Rest && re != 0) 
-                    res.AddSlot(MoneyReferent.ATTR_ALTREST, (re).ToString(), true, 0);
+                    res.AddSlot(MoneyReferent.ATTR_ALTREST, ((int)re).ToString(), true, 0);
             }
             if (nex.AltRestMoney > 0) 
                 res.AddSlot(MoneyReferent.ATTR_ALTREST, nex.AltRestMoney.ToString(), true, 0);

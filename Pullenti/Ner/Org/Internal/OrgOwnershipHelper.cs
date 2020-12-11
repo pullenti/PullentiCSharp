@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -12,9 +13,6 @@ namespace Pullenti.Ner.Org.Internal
 {
     static class OrgOwnershipHelper
     {
-        /// <summary>
-        /// Проверка на отношения "вышестоящий - нижестоящий"
-        /// </summary>
         public static bool CanBeHigher(Pullenti.Ner.Org.OrganizationReferent higher, Pullenti.Ner.Org.OrganizationReferent lower, bool robust = false)
         {
             if (higher == null || lower == null || higher == lower) 

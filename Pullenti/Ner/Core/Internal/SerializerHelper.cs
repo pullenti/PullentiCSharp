@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -18,7 +19,7 @@ namespace Pullenti.Ner.Core.Internal
         }
         public static int DeserializeInt(Stream stream)
         {
-            byte[] buf = new byte[4];
+            byte[] buf = new byte[(int)4];
             stream.Read(buf, 0, 4);
             return BitConverter.ToInt32(buf, 0);
         }
@@ -28,7 +29,7 @@ namespace Pullenti.Ner.Core.Internal
         }
         public static short DeserializeShort(Stream stream)
         {
-            byte[] buf = new byte[2];
+            byte[] buf = new byte[(int)2];
             stream.Read(buf, 0, 2);
             return BitConverter.ToInt16(buf, 0);
         }
@@ -55,7 +56,7 @@ namespace Pullenti.Ner.Core.Internal
                 return null;
             if (len == 0) 
                 return "";
-            byte[] data = new byte[len];
+            byte[] data = new byte[(int)len];
             stream.Read(data, 0, data.Length);
             return Encoding.UTF8.GetString(data);
         }

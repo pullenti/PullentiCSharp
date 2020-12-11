@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -14,10 +15,6 @@ namespace Pullenti.Ner.Core.Internal
     // Это для поддержки получения встроенных ресурсов
     static class ResourceHelper
     {
-        /// <summary>
-        /// Получить встроенный ресурс
-        /// </summary>
-        /// <param name="name">имя, на который оканчивается ресурс</param>
         public static byte[] GetBytes(string name)
         {
             Assembly assembly = typeof(ResourceHelper).Assembly;

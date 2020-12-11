@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -78,9 +79,6 @@ namespace Pullenti.Morph.Internal
                 }
             }
         }
-        /// <summary>
-        /// Выгрузить язык(и), если они больше не нужны
-        /// </summary>
         internal void UnloadLanguages(Pullenti.Morph.MorphLang langs)
         {
             if (langs.IsRu && m_EngineRu.Language.IsRu) 
@@ -113,16 +111,10 @@ namespace Pullenti.Morph.Internal
             else 
                 p = (p * 100) / max;
             if (p != lastPercent && progress != null) 
-                progress(null, new ProgressChangedEventArgs(p, null)) /* error */;
+                progress(null, new ProgressChangedEventArgs((int)p, null)) /* error */;
             lastPercent = p;
         }
         int lastPercent;
-        /// <summary>
-        /// Произвести морфологический анализ текста
-        /// </summary>
-        /// <param name="text">исходный текст</param>
-        /// <param name="lang">язык (если null, то попробует определить)</param>
-        /// <return>последовательность результирующих морфем</return>
         public List<Pullenti.Morph.MorphToken> Run(string text, bool onlyTokenizing, Pullenti.Morph.MorphLang dlang, bool goodText, ProgressChangedEventHandler progress)
         {
             if (string.IsNullOrEmpty(text)) 

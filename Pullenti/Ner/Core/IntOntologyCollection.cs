@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -14,9 +15,6 @@ namespace Pullenti.Ner.Core
     // Не помню уже, зачем был введён, но для чего-то нужен.
     public class IntOntologyCollection
     {
-        /// <summary>
-        /// Список элементов онтологии
-        /// </summary>
         public ICollection<IntOntologyItem> Items
         {
             get
@@ -24,15 +22,9 @@ namespace Pullenti.Ner.Core
                 return m_Items;
             }
         }
-        /// <summary>
-        /// Признак того, что это внешняя онтология
-        /// </summary>
         public bool IsExtOntology;
         List<IntOntologyItem> m_Items = new List<IntOntologyItem>();
         TerminCollection m_Termins = new TerminCollection();
-        /// <summary>
-        /// Добавить элемент (внимание, после добавления нельзя менять термины у элемента)
-        /// </summary>
         public void AddItem(IntOntologyItem di)
         {
             m_Items.Add(di);
@@ -53,9 +45,6 @@ namespace Pullenti.Ner.Core
                 }
             }
         }
-        /// <summary>
-        /// Добавить в онтологию сущность
-        /// </summary>
         public bool AddReferent(Pullenti.Ner.Referent referent)
         {
             if (referent == null) 
@@ -84,9 +73,6 @@ namespace Pullenti.Ner.Core
             this.AddItem(oi);
             return true;
         }
-        /// <summary>
-        /// Добавить термин в существующий элемент
-        /// </summary>
         public void AddTermin(IntOntologyItem di, Termin t)
         {
             OntologyTermin nt = new OntologyTermin() { Owner = di, Tag = t.Tag };
@@ -98,9 +84,6 @@ namespace Pullenti.Ner.Core
             public Pullenti.Ner.Core.IntOntologyItem Owner;
         }
 
-        /// <summary>
-        /// Добавить отдельный термин (после добавления нельзя изменять свойства термина)
-        /// </summary>
         public void Add(Termin t)
         {
             m_Termins.Add(t);
@@ -109,10 +92,6 @@ namespace Pullenti.Ner.Core
         {
             return m_Termins.FindTerminsByCanonicText(text);
         }
-        /// <summary>
-        /// Привязать с указанной позиции
-        /// </summary>
-        /// <param name="canBeGeoObject">при True внутри может быть географический объект (Министерство РФ по делам ...)</param>
         public List<IntOntologyToken> TryAttach(Pullenti.Ner.Token t, string referentTypeName = null, bool canBeGeoObject = false)
         {
             List<TerminToken> tts = m_Termins.TryParseAll(t, (canBeGeoObject ? TerminParseAttr.CanBeGeoObject : TerminParseAttr.No));
@@ -140,9 +119,6 @@ namespace Pullenti.Ner.Core
             }
             return (res.Count == 0 ? null : res);
         }
-        /// <summary>
-        /// Найти похожие онтологические объекты
-        /// </summary>
         public List<IntOntologyItem> TryAttachByItem(IntOntologyItem item)
         {
             if (item == null) 
@@ -168,9 +144,6 @@ namespace Pullenti.Ner.Core
             }
             return res;
         }
-        /// <summary>
-        /// Найти эквивалентные сущности через онтологические объекты
-        /// </summary>
         public List<Pullenti.Ner.Referent> TryAttachByReferent(Pullenti.Ner.Referent referent, IntOntologyItem item = null, bool mustBeSingle = false)
         {
             if (referent == null) 
@@ -213,12 +186,6 @@ namespace Pullenti.Ner.Core
             }
             return res;
         }
-        /// <summary>
-        /// Произвести привязку, если элемент найдётся, то установить ссылку на OntologyElement
-        /// </summary>
-        /// <summary>
-        /// Удалить всё, что связано с сущностью
-        /// </summary>
         public void Remove(Pullenti.Ner.Referent r)
         {
             int i;

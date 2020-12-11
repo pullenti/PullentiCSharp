@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -20,9 +21,6 @@ namespace Pullenti.Ner.Measure.Internal
         public List<MeasureToken> Internals = new List<MeasureToken>();
         public MeasureToken InternalEx;
         public bool IsSet;
-        /// <summary>
-        /// Очень хорошее выделение
-        /// </summary>
         public bool Reliable;
         public bool IsEmpty;
         public override string ToString()
@@ -223,9 +221,6 @@ namespace Pullenti.Ner.Measure.Internal
                 }
             }
         }
-        /// <summary>
-        /// Выделение вместе с наименованием
-        /// </summary>
         public static MeasureToken TryParse(Pullenti.Ner.Token t, Pullenti.Ner.Core.TerminCollection addUnits, bool canBeSet = true, bool canUnitsAbsent = false, bool isResctriction = false, bool isSubval = false)
         {
             if (!(t is Pullenti.Ner.TextToken)) 

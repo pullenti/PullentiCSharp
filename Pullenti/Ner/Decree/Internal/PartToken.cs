@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -41,9 +42,6 @@ namespace Pullenti.Ner.Decree.Internal
             AddAgree,
         }
 
-        /// <summary>
-        /// Тип примитива
-        /// </summary>
         public ItemType Typ;
         public ItemType AltTyp = ItemType.Undefined;
         public class PartValue : Pullenti.Ner.MetaToken
@@ -190,22 +188,13 @@ namespace Pullenti.Ner.Decree.Internal
             }
         }
 
-        /// <summary>
-        /// Значения
-        /// </summary>
         public List<PartValue> Values = new List<PartValue>();
         public string Name;
-        /// <summary>
-        /// Эо для последующего перебора
-        /// </summary>
         public int Ind;
         public Pullenti.Ner.Decree.DecreeReferent Decree;
         public bool IsDoubt;
         public bool DelimAfter;
         public bool HasTerminator;
-        /// <summary>
-        /// Анафорическая ссылка
-        /// </summary>
         public Pullenti.Ner.TextToken AnaforRef;
         public override string ToString()
         {
@@ -224,9 +213,6 @@ namespace Pullenti.Ner.Decree.Internal
                 res.AppendFormat(", Ref='{0}'", AnaforRef.Term);
             return res.ToString();
         }
-        /// <summary>
-        /// Привязать с указанной позиции один примитив
-        /// </summary>
         public static PartToken TryAttach(Pullenti.Ner.Token t, PartToken prev, bool inBracket = false, bool ignoreNumber = false)
         {
             if (t == null) 
@@ -786,10 +772,6 @@ namespace Pullenti.Ner.Decree.Internal
             }
             return null;
         }
-        /// <summary>
-        /// Привязать примитивы в контейнере с указанной позиции
-        /// </summary>
-        /// <return>Список примитивов</return>
         public static List<PartToken> TryAttachList(Pullenti.Ner.Token t, bool inBracket = false, int maxCount = 40)
         {
             PartToken p = TryAttach(t, null, inBracket, false);

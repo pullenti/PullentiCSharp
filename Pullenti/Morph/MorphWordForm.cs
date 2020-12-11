@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -47,6 +48,8 @@ namespace Pullenti.Morph
         /// Коэффициент достоверности для неизвестных словоформ (чем больше, тем вероятнее)
         /// </summary>
         public short UndefCoef;
+        // Используется произвольным образом
+        public object Tag;
         public void CopyFromWordForm(MorphWordForm src)
         {
             base.CopyFrom(src);
@@ -121,6 +124,14 @@ namespace Pullenti.Morph
                 if ((Class == mr.Class && Number == mr.Number && Gender == mr.Gender) && NormalCase == mr.NormalCase && NormalFull == mr.NormalFull) 
                 {
                     mr.Case |= Case;
+                    MorphPerson p = Misc.Person;
+                    if (p != MorphPerson.Undefined && p != mr.Misc.Person) 
+                    {
+                        MorphMiscInfo mi = new MorphMiscInfo();
+                        mi.CopyFrom(mr.Misc);
+                        mi.Person = mr.Misc.Person | Misc.Person;
+                        mr.Misc = mi;
+                    }
                     return true;
                 }
             }

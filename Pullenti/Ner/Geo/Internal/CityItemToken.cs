@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -26,41 +27,14 @@ namespace Pullenti.Ner.Geo.Internal
             Misc,
         }
 
-        /// <summary>
-        /// Тип элемента
-        /// </summary>
         public ItemType Typ;
-        /// <summary>
-        /// Строковое значение
-        /// </summary>
         public string Value;
-        /// <summary>
-        /// Альтернативное значение
-        /// </summary>
         public string AltValue;
-        /// <summary>
-        /// Ссылка на онтологический элемент (существующий город)
-        /// </summary>
         public Pullenti.Ner.Core.IntOntologyItem OntoItem;
-        /// <summary>
-        /// Признак сомнительности
-        /// </summary>
         public bool Doubtful;
-        /// <summary>
-        /// Есть ли перед элементом некоторый географический объект
-        /// </summary>
         public bool GeoObjectBefore;
-        /// <summary>
-        /// Есть ли после элемента некоторый географический объект
-        /// </summary>
         public bool GeoObjectAfter;
-        /// <summary>
-        /// Столица Чечни
-        /// </summary>
         public Pullenti.Ner.Geo.GeoReferent HigherGeo;
-        /// <summary>
-        /// Это ссылка на организацию (для: посёлок НИИ Радио)
-        /// </summary>
         public Pullenti.Ner.ReferentToken OrgRef;
         public override string ToString()
         {
@@ -677,7 +651,13 @@ namespace Pullenti.Ner.Geo.Internal
                             else if (prev == null) 
                             {
                                 if (MiscLocationHelper.CheckGeoObjectBefore(tt.Previous)) 
-                                    ok = true;
+                                {
+                                    if (tt1.IsNewlineAfter) 
+                                    {
+                                    }
+                                    else 
+                                        ok = true;
+                                }
                                 else if (geoAfter != null || hasGeoAfter) 
                                     ok = true;
                             }

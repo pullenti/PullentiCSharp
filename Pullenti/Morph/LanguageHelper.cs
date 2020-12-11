@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -16,11 +17,6 @@ namespace Pullenti.Morph
     // Также содержит некоторые полезные функции.
     public static class LanguageHelper
     {
-        /// <summary>
-        /// Определить язык для неструктурированного ткста
-        /// </summary>
-        /// <param name="text">текст</param>
-        /// <return>код языка или null при ненахождении</return>
         public static string GetLanguageForText(string text)
         {
             if (string.IsNullOrEmpty(text)) 
@@ -48,10 +44,6 @@ namespace Pullenti.Morph
                 return "en";
             return null;
         }
-        /// <summary>
-        /// Определение языка для одного слова
-        /// </summary>
-        /// <param name="word">слово (в верхнем регистре)</param>
         internal static MorphLang GetWordLang(string word)
         {
             int cyr = 0;
@@ -166,27 +158,16 @@ namespace Pullenti.Morph
             Pullenti.Morph.Internal.UnicodeInfo ui = Pullenti.Morph.Internal.UnicodeInfo.AllChars[(int)ch];
             return ui.IsHiphen;
         }
-        /// <summary>
-        /// Проверка, что это гласная на кириллице
-        /// </summary>
         public static bool IsCyrillicVowel(char ch)
         {
             Pullenti.Morph.Internal.UnicodeInfo ui = Pullenti.Morph.Internal.UnicodeInfo.AllChars[(int)ch];
             return ui.IsCyrillic && ui.IsVowel;
         }
-        /// <summary>
-        /// Проверка, что это гласная на латинице
-        /// </summary>
         public static bool IsLatinVowel(char ch)
         {
             Pullenti.Morph.Internal.UnicodeInfo ui = Pullenti.Morph.Internal.UnicodeInfo.AllChars[(int)ch];
             return ui.IsLatin && ui.IsVowel;
         }
-        /// <summary>
-        /// Получить для латинской буквы её возможный графический эквивалент на кириллице 
-        /// (для тексто-графических замен)
-        /// </summary>
-        /// <return>0 - нет эквивалента</return>
         public static char GetCyrForLat(char lat)
         {
             int i = m_LatChars.IndexOf(lat);
@@ -197,11 +178,6 @@ namespace Pullenti.Morph
                 return m_CyrGreekChars[i];
             return (char)0;
         }
-        /// <summary>
-        /// Получить для кириллической буквы её возможный графический эквивалент на латинице 
-        /// (для тексто-графических замен)
-        /// </summary>
-        /// <return>0 - нет эквивалента</return>
         public static char GetLatForCyr(char cyr)
         {
             int i = m_CyrChars.IndexOf(cyr);
@@ -210,9 +186,6 @@ namespace Pullenti.Morph
             else 
                 return m_LatChars[i];
         }
-        /// <summary>
-        /// Транслитеральная корректировка
-        /// </summary>
         public static string TransliteralCorrection(string value, string prevValue, bool always = false)
         {
             int pureCyr = 0;
@@ -348,10 +321,6 @@ namespace Pullenti.Morph
         static string[] m_Preps = new string[] {("БЕЗ;ДО;ИЗ;ИЗЗА;ОТ;У;ДЛЯ;РАДИ;ВОЗЛЕ;ПОЗАДИ;ВПЕРЕДИ;БЛИЗ;ВБЛИЗИ;ВГЛУБЬ;ВВИДУ;ВДОЛЬ;ВЗАМЕН;ВКРУГ;ВМЕСТО;" + "ВНЕ;ВНИЗУ;ВНУТРИ;ВНУТРЬ;ВОКРУГ;ВРОДЕ;ВСЛЕД;ВСЛЕДСТВИЕ;ЗАМЕСТО;ИЗНУТРИ;КАСАТЕЛЬНО;КРОМЕ;" + "МИМО;НАВРОДЕ;НАЗАД;НАКАНУНЕ;НАПОДОБИЕ;НАПРОТИВ;НАСЧЕТ;ОКОЛО;ОТНОСИТЕЛЬНО;") + "ПОВЕРХ;ПОДЛЕ;ПОМИМО;ПОПЕРЕК;ПОРЯДКА;ПОСЕРЕДИНЕ;ПОСРЕДИ;ПОСЛЕ;ПРЕВЫШЕ;ПРЕЖДЕ;ПРОТИВ;СВЕРХ;" + "СВЫШЕ;СНАРУЖИ;СРЕДИ;СУПРОТИВ;ПУТЕМ;ПОСРЕДСТВОМ", "К;БЛАГОДАРЯ;ВОПРЕКИ;НАВСТРЕЧУ;СОГЛАСНО;СООБРАЗНО;ПАРАЛЛЕЛЬНО;ПОДОБНО;СООТВЕТСТВЕННО;СОРАЗМЕРНО", "ПРО;ЧЕРЕЗ;СКВОЗЬ;СПУСТЯ", "НАД;ПЕРЕД;ПРЕД", "ПРИ", "В;НА;О;ВКЛЮЧАЯ", "МЕЖДУ", "ЗА;ПОД", "ПО", "С"};
         static MorphCase[] m_Cases = new MorphCase[] {MorphCase.Genitive, MorphCase.Dative, MorphCase.Accusative, MorphCase.Instrumental, MorphCase.Prepositional, MorphCase.Accusative | MorphCase.Prepositional, MorphCase.Genitive | MorphCase.Instrumental, MorphCase.Accusative | MorphCase.Instrumental, MorphCase.Dative | MorphCase.Accusative | MorphCase.Prepositional, MorphCase.Genitive | MorphCase.Accusative | MorphCase.Instrumental};
         static Dictionary<string, MorphCase> m_PrepCases;
-        /// <summary>
-        /// Получить возможные падежи существительных после предлогов
-        /// </summary>
-        /// <param name="prep">предлог</param>
         public static MorphCase GetCaseAfterPreposition(string prep)
         {
             MorphCase mc;
@@ -370,9 +339,6 @@ namespace Pullenti.Morph
             else 
                 return prep;
         }
-        /// <summary>
-        /// Замена стандартной функции string.EndsWith, которая относительно медленная
-        /// </summary>
         public static bool EndsWith(string str, string substr)
         {
             if (str == null || substr == null) 
@@ -388,9 +354,6 @@ namespace Pullenti.Morph
             }
             return true;
         }
-        /// <summary>
-        /// Проверка окончания строки на одну из заданных подстрок
-        /// </summary>
         public static bool EndsWithEx(string str, string substr, string substr2, string substr3 = null, string substr4 = null)
         {
             if (str == null) 
@@ -535,11 +498,6 @@ namespace Pullenti.Morph
         }
         static string m_Rus0 = "–ЁѐЀЍѝЎўӢӣ";
         static string m_Rus1 = "-ЕЕЕИИУУЙЙ";
-        /// <summary>
-        /// Откорректировать слово (перевод в верхний регистр и замена некоторых букв типа Ё->Е)
-        /// </summary>
-        /// <param name="w">исходное слово</param>
-        /// <return>откорректированное слово</return>
         public static string CorrectWord(string w)
         {
             if (w == null) 

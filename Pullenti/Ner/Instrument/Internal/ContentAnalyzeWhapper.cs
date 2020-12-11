@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -109,7 +110,7 @@ namespace Pullenti.Ner.Instrument.Internal
             ListHelper.CorrectIndex(lines);
             ListHelper.CorrectAppList(lines);
             if (directives > 0 && directives > parts) 
-                this._analizeContentWithDirectives(root, lines, topDoc.m_Doc != null && topDoc.m_Doc.CaseNumber != null);
+                this._analizeContentWithDirectives(root, lines, topDoc != null && topDoc.m_Doc != null && topDoc.m_Doc.CaseNumber != null);
             else 
                 this._analizeContentWithContainers(root, lines, 0, topDoc);
             this._analizePreamble(root);
@@ -161,9 +162,6 @@ namespace Pullenti.Ner.Instrument.Internal
                     root.BeginToken = root.Children[0].BeginToken;
             }
         }
-        /// <summary>
-        /// Анализ текстов, явно содержащих главы, разделы, статьи и т.п.
-        /// </summary>
         void _analizeContentWithContainers(FragToken root, List<InstrToken1> lines, int topLevel, FragToken topDoc)
         {
             List<InstrToken1> nums = new List<InstrToken1>();
@@ -493,9 +491,6 @@ namespace Pullenti.Ner.Instrument.Internal
             }
             return i;
         }
-        /// <summary>
-        /// Анализ ситуации, когда главы без ключевых слов, только цифра + наименование
-        /// </summary>
         bool _analizeChapterWithoutKeywords(FragToken root, List<InstrToken1> lines, FragToken topDoc)
         {
             List<InstrToken1> nums = NumberingHelper.ExtractMainSequence(lines, true, false);
@@ -1101,9 +1096,6 @@ namespace Pullenti.Ner.Instrument.Internal
                 res.Insert(0, lines[0]);
             return res;
         }
-        /// <summary>
-        /// Анализ текстов, содержащих директивы
-        /// </summary>
         void _analizeContentWithDirectives(FragToken root, List<InstrToken1> lines, bool isJus)
         {
             List<InstrToken1> dirSeq = _extractDirectiveSequence(lines);

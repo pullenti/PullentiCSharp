@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -46,10 +47,6 @@ namespace Pullenti.Ner.Decree.Internal
             }
             return null;
         }
-        /// <summary>
-        /// Это для оформления ссылок по некоторым стандартам (когда гиперссылкой нужно выделить не всю сущность, 
-        /// а лишь некоторую её часть)
-        /// </summary>
         public static CanonicDecreeRefUri TryCreateCanonicDecreeRefUri(Pullenti.Ner.Token t)
         {
             if (!(t is Pullenti.Ner.ReferentToken)) 
@@ -503,10 +500,6 @@ namespace Pullenti.Ner.Decree.Internal
             res = res.Replace('.', ' ').Replace("RUR", "руб.").Replace("RUB", "руб.");
             return res;
         }
-        /// <summary>
-        /// Проверка корректности НДС для суммы
-        /// </summary>
-        /// <param name="t">Указывает на значение, для которой должно далее следовать НДС</param>
         public static Pullenti.Ner.MetaToken CheckNds(Pullenti.Ner.Token t, double nds = (double)18F, bool ndsMustbeMoney = false)
         {
             if (t == null || nds <= 0) 

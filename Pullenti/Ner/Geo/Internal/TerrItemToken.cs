@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -18,45 +19,18 @@ namespace Pullenti.Ner.Geo.Internal
         public TerrItemToken(Pullenti.Ner.Token begin, Pullenti.Ner.Token end) : base(begin, end, null)
         {
         }
-        /// <summary>
-        /// Ссылка на существующий объект
-        /// </summary>
         public Pullenti.Ner.Core.IntOntologyItem OntoItem;
-        /// <summary>
-        /// Это бывает другой вариант (Распублика Алтай - Алтайский край)
-        /// </summary>
         public Pullenti.Ner.Core.IntOntologyItem OntoItem2;
-        /// <summary>
-        /// Это термин для существительного и прилагательного
-        /// </summary>
         public TerrTermin TerminItem;
-        /// <summary>
-        /// Прилагательное (существующих объектов, для терминов или для собственного имени)
-        /// </summary>
         public bool IsAdjective;
         public bool IsDistrictName;
-        /// <summary>
-        /// Это ссылка на страну для "китайская провинция"
-        /// </summary>
         public Pullenti.Ner.ReferentToken AdjectiveRef;
-        /// <summary>
-        /// Ссылка на организацию-РЖД
-        /// </summary>
         public Pullenti.Ner.ReferentToken Rzd;
         public string RzdDir;
-        /// <summary>
-        /// Это если есть такой же город
-        /// </summary>
         public bool CanBeCity;
         public bool CanBeSurname;
-        /// <summary>
-        /// Прилагательное находится в словаре
-        /// </summary>
         public bool IsAdjInDictionary;
         public bool IsGeoInDictionary;
-        /// <summary>
-        /// Сомнительность...
-        /// </summary>
         public bool IsDoubt;
         public bool IsCityRegion
         {
@@ -982,9 +956,6 @@ namespace Pullenti.Ner.Geo.Internal
             }
             return res;
         }
-        /// <summary>
-        /// Это пыделение возможного имени для городского района типа Владыкино, Тёплый Стан)
-        /// </summary>
         public static TerrItemToken TryParseDistrictName(Pullenti.Ner.Token t, Pullenti.Ner.Core.IntOntologyCollection intOnt)
         {
             if (!(t is Pullenti.Ner.TextToken) || !t.Chars.IsCapitalUpper || !t.Chars.IsCyrillicLetter) 
@@ -1311,9 +1282,6 @@ namespace Pullenti.Ner.Geo.Internal
                 }
             }
         }
-        /// <summary>
-        /// Словарь стран и некоторых терминов
-        /// </summary>
         internal static Pullenti.Ner.Core.IntOntologyCollection m_TerrOntology;
         internal static Pullenti.Ner.Core.TerminCollection m_GeoAbbrs;
         static Pullenti.Ner.Core.IntOntologyItem m_RussiaRU;

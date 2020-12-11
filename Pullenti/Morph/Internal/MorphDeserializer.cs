@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -16,8 +17,8 @@ namespace Pullenti.Morph.Internal
         {
             using (GZipStream deflate = new GZipStream(str, CompressionMode.Decompress)) 
             {
-                byte[] buf = new byte[100000];
-                int len = (int)buf.Length;
+                byte[] buf = new byte[(int)100000];
+                int len = buf.Length;
                 while (true) 
                 {
                     int i = -1;

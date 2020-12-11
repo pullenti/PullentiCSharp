@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -11,34 +12,12 @@ namespace Pullenti.Ner.Definition
     // Для поддержки выделений тезисов с числовыми данными
     public class DefinitionWithNumericToken : Pullenti.Ner.MetaToken
     {
-        /// <summary>
-        /// Значение
-        /// </summary>
         public int Number;
-        /// <summary>
-        /// Начальная позиция числового значения в тексте
-        /// </summary>
         public int NumberBeginChar;
-        /// <summary>
-        /// Конечная позиция числового значения в тексте
-        /// </summary>
         public int NumberEndChar;
-        /// <summary>
-        /// Существительное (или именная группа) в единственном числе
-        /// </summary>
         public string Noun;
-        /// <summary>
-        /// Это же существительное во множественном числе и родительном падеже
-        /// </summary>
         public string NounsGenetive;
-        /// <summary>
-        /// Подстрока из Text, содержащая числовое значение вместе с существительным 
-        /// (чтобы потом при формировании вопроса можно было бы её заменить на что-угодно)
-        /// </summary>
         public string NumberSubstring;
-        /// <summary>
-        /// Текст тезиса
-        /// </summary>
         public string Text;
         public override string ToString()
         {
@@ -47,10 +26,6 @@ namespace Pullenti.Ner.Definition
         public DefinitionWithNumericToken(Pullenti.Ner.Token b, Pullenti.Ner.Token e) : base(b, e, null)
         {
         }
-        /// <summary>
-        /// Выделить определение с указанного токена
-        /// </summary>
-        /// <param name="t">токен</param>
         public static DefinitionWithNumericToken TryParse(Pullenti.Ner.Token t)
         {
             if (!Pullenti.Ner.Core.MiscHelper.CanBeStartOfSentence(t)) 

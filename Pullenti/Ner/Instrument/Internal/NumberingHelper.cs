@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -13,11 +14,6 @@ namespace Pullenti.Ner.Instrument.Internal
     // Поддержка анализа нумерации
     public static class NumberingHelper
     {
-        /// <summary>
-        /// Разница между двумя номерами
-        /// </summary>
-        /// <param name="canSubNumbers">может быть 1. - 1.1 - 2.</param>
-        /// <return>больше 0 - отличаются на это число, 0 не стыкуются</return>
         public static int CalcDelta(InstrToken1 prev, InstrToken1 next, bool canSubNumbers)
         {
             int n1 = prev.LastNumber;
@@ -159,13 +155,6 @@ namespace Pullenti.Ner.Instrument.Internal
             }
             return 0;
         }
-        /// <summary>
-        /// Выделить базовую верхоуровневую последовательность номеров (строк, содержащих номера)
-        /// </summary>
-        /// <param name="lines">исходные строки</param>
-        /// <param name="checkSpecTexts">проверять ли строки на мусор</param>
-        /// <param name="canSubNumbers">могут ли быть подномера типа 1. - 1.1 - 2.</param>
-        /// <return>null если не нашли или последовательность строк с номерами</return>
         public static List<InstrToken1> ExtractMainSequence(List<InstrToken1> lines, bool checkSpecTexts, bool canSubNumbers)
         {
             List<InstrToken1> res = null;
@@ -492,9 +481,6 @@ namespace Pullenti.Ner.Instrument.Internal
             }
             return null;
         }
-        /// <summary>
-        /// Создать результирующий узел, представляющий номер
-        /// </summary>
         public static void CreateNumber(FragToken owner, InstrToken1 itok)
         {
             if (itok.NumBeginToken == null || itok.NumEndToken == null) 
@@ -524,9 +510,6 @@ namespace Pullenti.Ner.Instrument.Internal
             owner.MinNumber = itok.LastMinNumber;
             owner.Itok = itok;
         }
-        /// <summary>
-        /// Распарсить нумерацию
-        /// </summary>
         public static void ParseNumber(Pullenti.Ner.Token t, InstrToken1 res, InstrToken1 prev)
         {
             _parseNumber(t, res, prev);

@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -22,14 +23,6 @@ namespace Pullenti.Ner.Core
                 return MiscHelper.ConvertFirstCharUpperAndOtherLower(str);
             return str;
         }
-        /// <summary>
-        /// Получить строковое значение между токенами, при этом исключая кавычки и скобки
-        /// </summary>
-        /// <param name="begin">начальный токен</param>
-        /// <param name="end">конечный токен</param>
-        /// <param name="normalizeFirstNounGroup">нормализовывать ли первую именную группу (именит. падеж)</param>
-        /// <param name="normalFirstGroupSingle">приводить ли к единственному числу первую именную группу</param>
-        /// <param name="ignoreGeoReferent">игнорировать внутри географические сущности</param>
         static string GetNameWithoutBrackets(Pullenti.Ner.Token begin, Pullenti.Ner.Token end, bool normalizeFirstNounGroup = false, bool normalFirstGroupSingle = false, bool ignoreGeoReferent = false)
         {
             string res = null;
@@ -123,9 +116,6 @@ namespace Pullenti.Ner.Core
             }
             return res;
         }
-        /// <summary>
-        /// Получить строковое значение между токенами без нормализации первой группы, всё в верхнем регистре.
-        /// </summary>
         static string GetName(Pullenti.Ner.Token begin, Pullenti.Ner.Token end)
         {
             string res = GetNameEx(begin, end, Pullenti.Morph.MorphClass.Undefined, Pullenti.Morph.MorphCase.Undefined, Pullenti.Morph.MorphGender.Undefined, false, false);

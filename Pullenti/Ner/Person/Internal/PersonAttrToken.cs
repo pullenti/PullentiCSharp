@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -318,13 +319,7 @@ namespace Pullenti.Ner.Person.Internal
         public PersonAttrTerminType Typ;
         public Pullenti.Morph.MorphGender Gender;
         public string Value;
-        /// <summary>
-        /// Например, патриарх Московский и всея Руси - это будет Московский
-        /// </summary>
         internal PersonItemToken KingSurname;
-        /// <summary>
-        /// ВОзраст
-        /// </summary>
         public string Age;
         public Pullenti.Ner.Person.PersonPropertyReferent PropRef
         {
@@ -376,9 +371,6 @@ namespace Pullenti.Ner.Person.Internal
         public bool CanBeSinglePerson;
         public int CanHasPersonAfter = 0;
         public bool CanBeSameSurname;
-        /// <summary>
-        /// Сомнительный атрибут
-        /// </summary>
         public bool IsDoubt;
         public override string ToString()
         {

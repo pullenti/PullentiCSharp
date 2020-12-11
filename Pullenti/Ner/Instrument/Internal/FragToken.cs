@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -1274,6 +1275,7 @@ namespace Pullenti.Ner.Instrument.Internal
                     return new FragToken(t, tt) { Kind = Pullenti.Ner.Instrument.InstrumentKind.Undefined };
                 }
             }
+            Pullenti.Ner.Token t0 = t;
             while ((t is Pullenti.Ner.TextToken) && t.LengthChar == 1 && t.Next != null) 
             {
                 t = t.Next;
@@ -1283,6 +1285,56 @@ namespace Pullenti.Ner.Instrument.Internal
                 InstrToken1 itt = InstrToken1.Parse(t, false, null, 0, null, false, 0, false, false);
                 if (itt != null) 
                     return new FragToken(t, itt.EndToken) { Kind = Pullenti.Ner.Instrument.InstrumentKind.Undefined };
+            }
+            int nums = 0;
+            int spec = 0;
+            int chars = 0;
+            int words = 0;
+            for (Pullenti.Ner.Token t1 = t0; t1 != null; t1 = t1.Next) 
+            {
+                Pullenti.Ner.Decree.Internal.DecreeToken ddd = Pullenti.Ner.Decree.Internal.DecreeToken.TryAttach(t1, null, false);
+                if (ddd != null) 
+                    break;
+                if (t1.IsTableControlChar) 
+                {
+                }
+                else if (t1 is Pullenti.Ner.NumberToken) 
+                    nums++;
+                else if (!(t1 is Pullenti.Ner.TextToken) || t1.LengthChar > 7) 
+                    break;
+                else if (!t1.Chars.IsLetter) 
+                    spec++;
+                else if (t1.LengthChar < 3) 
+                    chars++;
+                else if (t1.GetMorphClassInDictionary().IsUndefined) 
+                    chars++;
+                else 
+                    words++;
+                if (!t1.IsNewlineAfter) 
+                    continue;
+                if ((nums + spec + chars) <= 1) 
+                    break;
+                if ((nums + spec + chars) > (words * 3)) 
+                {
+                }
+                else if ((words < 2) && (nums + spec + chars) > 3) 
+                {
+                }
+                else 
+                    break;
+                return new FragToken(t0, t1) { Kind = Pullenti.Ner.Instrument.InstrumentKind.Undefined };
+            }
+            if (t.GetReferent() is Pullenti.Ner.Address.StreetReferent) 
+            {
+                InstrToken1 lin = InstrToken1.Parse(t0, true, null, 0, null, false, 0, false, false);
+                if (lin != null && (lin.LengthChar < 70)) 
+                    return new FragToken(t0, lin.EndToken) { Kind = Pullenti.Ner.Instrument.InstrumentKind.Contact };
+            }
+            if (t0.IsChar('(')) 
+            {
+                Pullenti.Ner.Core.BracketSequenceToken br = Pullenti.Ner.Core.BracketHelper.TryParse(t0, Pullenti.Ner.Core.BracketParseAttr.No, 100);
+                if (br != null && br.IsNewlineAfter) 
+                    return new FragToken(t0, br.EndToken) { Kind = Pullenti.Ner.Instrument.InstrumentKind.Undefined };
             }
             return null;
         }
@@ -1763,19 +1815,19 @@ namespace Pullenti.Ner.Instrument.Internal
                     title.EndToken = appr1.EndToken;
                     continue;
                 }
+                FragToken eds = _createEditions(t);
+                if (eds != null) 
+                {
+                    title.Children.Add(eds);
+                    title.EndToken = (t = eds.EndToken);
+                    continue;
+                }
                 appr1 = _createMisc(t);
                 if (appr1 != null) 
                 {
                     t = appr1.EndToken;
                     title.Children.Add(appr1);
                     title.EndToken = appr1.EndToken;
-                    continue;
-                }
-                FragToken eds = _createEditions(t);
-                if (eds != null) 
-                {
-                    title.Children.Add(eds);
-                    title.EndToken = (t = eds.EndToken);
                     continue;
                 }
             }
@@ -1899,8 +1951,8 @@ namespace Pullenti.Ner.Instrument.Internal
                 }
                 if (tab.Number > 1) 
                 {
-                    int[] rnums = new int[tab.Number];
-                    int[] rnumsCols = new int[tab.Number];
+                    int[] rnums = new int[(int)tab.Number];
+                    int[] rnumsCols = new int[(int)tab.Number];
                     foreach (FragToken r in tab.Children) 
                     {
                         int no = 0;
@@ -2300,6 +2352,9 @@ namespace Pullenti.Ner.Instrument.Internal
                         title.BeginToken = appr.BeginToken;
                     continue;
                 }
+                FragToken edss = _createEditions(t);
+                if (edss != null) 
+                    break;
                 FragToken misc = _createMisc(t);
                 if (misc != null) 
                 {
@@ -2307,9 +2362,6 @@ namespace Pullenti.Ner.Instrument.Internal
                     title.Children.Add(misc);
                     continue;
                 }
-                FragToken edss = _createEditions(t);
-                if (edss != null) 
-                    break;
                 Pullenti.Ner.Decree.Internal.DecreeToken dt = Pullenti.Ner.Decree.Internal.DecreeToken.TryAttach(t, dt0, false);
                 if (dt != null) 
                 {
@@ -2596,19 +2648,19 @@ namespace Pullenti.Ner.Instrument.Internal
                                     t = (title.EndToken = appr1.EndToken);
                                     continue;
                                 }
-                                appr1 = _createMisc(t);
-                                if (appr1 != null) 
-                                {
-                                    title.Children.Add(appr1);
-                                    t = (title.EndToken = appr1.EndToken);
-                                    continue;
-                                }
                                 FragToken eds = _createEditions(t);
                                 if (eds != null) 
                                 {
                                     title.Children.Add(eds);
                                     t = (title.EndToken = eds.EndToken);
                                     break;
+                                }
+                                appr1 = _createMisc(t);
+                                if (appr1 != null) 
+                                {
+                                    title.Children.Add(appr1);
+                                    t = (title.EndToken = appr1.EndToken);
+                                    continue;
                                 }
                                 Pullenti.Ner.Decree.Internal.DecreeToken dt00 = Pullenti.Ner.Decree.Internal.DecreeToken.TryAttach(t, null, false);
                                 if (dt00 != null) 
@@ -2623,6 +2675,20 @@ namespace Pullenti.Ner.Instrument.Internal
                                 break;
                             }
                             return title;
+                        }
+                    }
+                }
+                if (t != null && t.IsValue("О", null)) 
+                {
+                    Pullenti.Ner.Decree.Internal.DecreeToken nam = Pullenti.Ner.Decree.Internal.DecreeToken.TryAttachName(t, null, true, false);
+                    if (nam != null) 
+                    {
+                        name = FragToken.GetRestoredName(t, nam.EndToken, false);
+                        if (!string.IsNullOrEmpty(name)) 
+                        {
+                            t1 = nam.EndToken;
+                            doc.AddSlot(Pullenti.Ner.Instrument.InstrumentBlockReferent.ATTR_NAME, name.Trim(), true, 0);
+                            title.Children.Add(new FragToken(t, t1) { Kind = Pullenti.Ner.Instrument.InstrumentKind.Name, Value = name.Trim() });
                         }
                     }
                 }
@@ -2861,14 +2927,6 @@ namespace Pullenti.Ner.Instrument.Internal
                     title.EndToken = appr1.EndToken;
                     continue;
                 }
-                appr1 = _createMisc(t1);
-                if (appr1 != null) 
-                {
-                    t1 = appr1.EndToken;
-                    title.Children.Add(appr1);
-                    title.EndToken = appr1.EndToken;
-                    continue;
-                }
                 FragToken cinf = _createCaseInfo(t1);
                 if (cinf != null) 
                 {
@@ -2882,6 +2940,14 @@ namespace Pullenti.Ner.Instrument.Internal
                 {
                     title.Children.Add(eds);
                     title.EndToken = (t1 = eds.EndToken);
+                    continue;
+                }
+                appr1 = _createMisc(t1);
+                if (appr1 != null) 
+                {
+                    t1 = appr1.EndToken;
+                    title.Children.Add(appr1);
+                    title.EndToken = appr1.EndToken;
                     continue;
                 }
                 if ((t1.GetReferent() is Pullenti.Ner.Decree.DecreeReferent) && (t1.GetReferent() as Pullenti.Ner.Decree.DecreeReferent).Kind == Pullenti.Ner.Decree.DecreeKind.Publisher && t1.IsNewlineAfter) 
@@ -3308,22 +3374,22 @@ namespace Pullenti.Ner.Instrument.Internal
                         return title;
                     continue;
                 }
-                ta = _createMisc(t);
-                if (ta != null) 
-                {
-                    title.Children.Add(ta);
-                    title.EndToken = (t = ta.EndToken);
-                    t = t.Next;
-                    if (t == null) 
-                        return title;
-                    continue;
-                }
                 FragToken ee = _createEditions(t);
                 if (ee != null) 
                 {
                     title.Children.Add(ee);
                     title.EndToken = ee.EndToken;
                     t = ee.EndToken.Next;
+                    if (t == null) 
+                        return title;
+                    continue;
+                }
+                ta = _createMisc(t);
+                if (ta != null) 
+                {
+                    title.Children.Add(ta);
+                    title.EndToken = (t = ta.EndToken);
+                    t = t.Next;
                     if (t == null) 
                         return title;
                     continue;

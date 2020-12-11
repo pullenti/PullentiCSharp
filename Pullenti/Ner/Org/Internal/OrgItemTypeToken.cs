@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -1261,23 +1262,11 @@ namespace Pullenti.Ner.Org.Internal
         {
         }
         public string Typ;
-        /// <summary>
-        /// Если непусто, то это была именная группа
-        /// </summary>
         public string Name;
         public string AltName;
         public bool NameIsName;
-        /// <summary>
-        /// Это дополнительный тип вместе с возможными прилагательными
-        /// </summary>
         public string AltTyp;
-        /// <summary>
-        /// Это номер бывает в начале
-        /// </summary>
         public string Number;
-        /// <summary>
-        /// Список профилей
-        /// </summary>
         public List<Pullenti.Ner.Org.OrgProfile> Profiles
         {
             get
@@ -1332,21 +1321,9 @@ namespace Pullenti.Ner.Org.Internal
             }
         }
         float m_Coef = -1;
-        /// <summary>
-        /// Это если среди прилагательных ключевого слова есть территория
-        /// </summary>
         public Pullenti.Ner.ReferentToken Geo;
-        /// <summary>
-        /// Для совместных предприятий может быть несколько стран
-        /// </summary>
         public Pullenti.Ner.ReferentToken Geo2;
-        /// <summary>
-        /// Это относится только к корневому слову
-        /// </summary>
         public Pullenti.Morph.CharsInfo CharsRoot = new Pullenti.Morph.CharsInfo();
-        /// <summary>
-        /// Количество слов в имени
-        /// </summary>
         public int NameWordsCount
         {
             get
@@ -1362,17 +1339,8 @@ namespace Pullenti.Ner.Org.Internal
                 return cou;
             }
         }
-        /// <summary>
-        /// Это может быть отдельное подразделение перед какой-либо организацией
-        /// </summary>
         public bool CanBeDepBeforeOrganization;
-        /// <summary>
-        /// Дочерняя организация
-        /// </summary>
         public bool IsDouterOrg;
-        /// <summary>
-        /// Корень - сомнительное слово (типа: организация или движение)
-        /// </summary>
         public bool IsDoubtRootWord
         {
             get
@@ -1389,9 +1357,6 @@ namespace Pullenti.Ner.Org.Internal
             }
         }
         int m_IsDoubtRootWord = -1;
-        /// <summary>
-        /// Это значит тип может полностью описывать организацию
-        /// </summary>
         public bool CanBeOrganization;
         public override string ToString()
         {
@@ -2535,9 +2500,6 @@ namespace Pullenti.Ner.Org.Internal
             }
             return true;
         }
-        /// <summary>
-        /// Проверка, что перед токеном есть специфическое слово типа "Президент" и т.п.
-        /// </summary>
         public static bool CheckOrgSpecialWordBefore(Pullenti.Ner.Token t)
         {
             if (t == null) 

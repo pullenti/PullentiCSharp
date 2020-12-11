@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -479,7 +480,7 @@ namespace Pullenti.Ner.Core
             if (((s == "НОМЕР" || s == "№" || s == "N") || s == "NO" || s == "NN") || s == "НР") 
             {
                 t1 = t.Next;
-                if (t1 != null && ((t1.IsCharOf("°№") || t1.IsValue("О", null)))) 
+                if (t1 != null && ((t1.IsCharOf("°№") || ((t1.IsValue("О", null) && !t1.IsNewlineBefore))))) 
                     t1 = t1.Next;
                 if (t1 != null && t1.IsChar('.')) 
                     t1 = t1.Next;

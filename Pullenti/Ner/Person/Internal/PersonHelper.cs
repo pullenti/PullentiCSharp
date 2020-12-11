@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -587,9 +588,6 @@ namespace Pullenti.Ner.Person.Internal
             }
             return new Pullenti.Ner.ReferentToken(p, begin, end) { Morph = morph, MiscAttrs = (int)p.m_PersonIdentityTyp };
         }
-        /// <summary>
-        /// Выделить пол
-        /// </summary>
         public static Pullenti.Ner.Token CreateSex(Pullenti.Ner.Person.PersonReferent pr, Pullenti.Ner.Token t)
         {
             if (t == null) 
@@ -626,11 +624,6 @@ namespace Pullenti.Ner.Person.Internal
             }
             return t;
         }
-        /// <summary>
-        /// Выделить кличку
-        /// </summary>
-        /// <param name="t">начальный токен</param>
-        /// <return>если не null, то последний токен клички, а в pr запишет саму кличку</return>
         public static Pullenti.Ner.Token CreateNickname(Pullenti.Ner.Person.PersonReferent pr, Pullenti.Ner.Token t)
         {
             bool hasKeyw = false;

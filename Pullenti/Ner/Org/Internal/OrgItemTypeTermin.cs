@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -47,13 +48,7 @@ namespace Pullenti.Ner.Org.Internal
             }
         }
         OrgItemTypeTyp m_Typ;
-        /// <summary>
-        /// Признак того, что тип обязательно входит в имя (например, Министерство)
-        /// </summary>
         public bool MustBePartofName = false;
-        /// <summary>
-        /// Чистый префикс, никогда не входит в имя (типа ООО)
-        /// </summary>
         public bool IsPurePrefix;
         public bool CanBeNormalDep;
         public bool CanHasNumber;
@@ -62,9 +57,6 @@ namespace Pullenti.Ner.Org.Internal
         public bool MustHasCapitalName;
         public bool IsTop;
         public bool CanBeSingleGeo;
-        /// <summary>
-        /// Корень - сомнительное слово (типа: организация или движение)
-        /// </summary>
         public bool IsDoubtWord;
         public float Coeff;
         public List<Pullenti.Ner.Org.OrgProfile> Profiles = new List<Pullenti.Ner.Org.OrgProfile>();

@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -194,14 +195,8 @@ namespace Pullenti.Ner.Core
                 }
             }
             Pullenti.Ner.TextToken m_Source;
-            /// <summary>
-            /// То есть на месте этого терма может быть всё, что угодно
-            /// </summary>
             public bool IsPatternAny;
             string m_Number;
-            /// <summary>
-            /// Варианты морфологического написания
-            /// </summary>
             public ICollection<string> Variants
             {
                 get
@@ -210,9 +205,6 @@ namespace Pullenti.Ner.Core
                 }
             }
             List<string> m_Variants = new List<string>();
-            /// <summary>
-            /// Каноническое изображение (первый вариант)
-            /// </summary>
             public string CanonicalText
             {
                 get
@@ -233,9 +225,6 @@ namespace Pullenti.Ner.Core
                 }
                 return res.ToString();
             }
-            /// <summary>
-            /// Признак того, что это число
-            /// </summary>
             public bool IsNumber
             {
                 get
@@ -243,9 +232,6 @@ namespace Pullenti.Ner.Core
                     return m_Source == null || m_Number != null;
                 }
             }
-            /// <summary>
-            /// Это перенос
-            /// </summary>
             public bool IsHiphen
             {
                 get
@@ -253,9 +239,6 @@ namespace Pullenti.Ner.Core
                     return m_Source != null && m_Source.Term == "-";
                 }
             }
-            /// <summary>
-            /// Это точка
-            /// </summary>
             public bool IsPoint
             {
                 get
@@ -263,9 +246,6 @@ namespace Pullenti.Ner.Core
                     return m_Source != null && m_Source.Term == ".";
                 }
             }
-            /// <summary>
-            /// Род
-            /// </summary>
             public virtual Pullenti.Morph.MorphGender Gender
             {
                 get
@@ -357,9 +337,6 @@ namespace Pullenti.Ner.Core
                 }
                 return false;
             }
-            /// <summary>
-            /// Сравнение с токеном
-            /// </summary>
             public bool CheckByToken(Pullenti.Ner.Token t)
             {
                 return this._check(t, 0);

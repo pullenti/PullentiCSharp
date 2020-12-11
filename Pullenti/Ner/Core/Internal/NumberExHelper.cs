@@ -1,6 +1,7 @@
 ﻿/*
- * Copyright (c) 2013, Pullenti. All rights reserved. Non-Commercial Freeware.
- * This class is generated using the converter UniSharping (www.unisharping.ru) from Pullenti C# project. 
+ * SDK Pullenti Lingvo, version 4.1, december 2020. Copyright (c) 2013, Pullenti. All rights reserved. 
+ * Non-Commercial Freeware and Commercial Software.
+ * This class is generated using the converter Unisharping (www.unisharping.ru) from Pullenti C# project. 
  * The latest version of the code is available on the site www.pullenti.ru
  */
 
@@ -12,9 +13,6 @@ namespace Pullenti.Ner.Core.Internal
 {
     static class NumberExHelper
     {
-        /// <summary>
-        /// Выделение стандартных мер, типа: 10 кв.м.
-        /// </summary>
         public static Pullenti.Ner.Core.NumberExToken TryParseNumberWithPostfix(Pullenti.Ner.Token t)
         {
             if (t == null) 
@@ -340,9 +338,6 @@ namespace Pullenti.Ner.Core.Internal
             int rest = ((int)(((((f - Math.Truncate(f)) + 0.0001)) * 10000))) / 100;
             return rest;
         }
-        /// <summary>
-        /// Это попробовать только тип (постфикс) без самого числа
-        /// </summary>
         public static Pullenti.Ner.Core.NumberExToken TryAttachPostfixOnly(Pullenti.Ner.Token t)
         {
             if (t == null) 
