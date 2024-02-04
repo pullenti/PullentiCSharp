@@ -1,3 +1,5 @@
+> # Репозиторий не обновляется, актуальная версия <a href="http://www.pullenti.ru/Download">на сайте Pullenti</a> 
+
 # PullentiCSharp
 
 Зеркало C# кода с [pullenti.ru/DownloadPage.aspx](http://www.pullenti.ru/DownloadPage.aspx).
